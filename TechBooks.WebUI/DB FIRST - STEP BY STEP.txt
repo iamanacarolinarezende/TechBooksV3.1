@@ -1,0 +1,30 @@
+﻿* STEP 1
+Make sure the WebUI is the Startup Project
+- Right click TechBooks.WebUI, then click "Set as Startup Project"
+
+* STEP 2
+Add the following Nugget Packages:
+- TechBooks.Data
+	- Microsoft.EntityFrameworkCore.SqlServer
+	- Microsoft.EntityFrameworkCore.Tools
+- TechBooks.WebUI
+	- Microsoft.EntityFrameworkCore.Tools
+
+* STEP 3
+- Make sure you have created the TechBooksDBV3.1 database based on scripting TechBooksDBV2 in Management Studio.
+- Delete the Users table.
+- In the Package Manager Console, select the Default Project: TechBooks.Data.
+- Run the following command: (Ferramentas > Nuget Package Manager > Package Manager console) Certeza que o Projeto Padrao esta selecionado como .Data
+	PM> scaffold-dbcontext "Server=Server=127.0.0.1,1433; Database=TechBooksDBV3.1; User Id=sa; Password=1312Ana@; TrustServerCertificate=True" 
+	Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TechBooksContext
+
+	System.Data.SqlClient
+
+* STEP 4
+- Move the context class file (TechBooksDbv31TempContext.cs) to the root project path TechBooks.Data.
+- Adjust the namespace of TechBooksDbv31TempContext.cs. Instead of TechBooks.Data.Models it should be TechBooks.Data at this point.
+- Move all model classes to TechBooks.Models. Fix all namespaces (model classes and context class).
+
+* STEP 5
+- In the context class, remove the OnConfiguring method that is exposing the connection string.
+ 
