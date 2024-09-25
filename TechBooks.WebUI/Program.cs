@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using TechBooks.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string cnString = builder.Configuration.GetConnectionString("TechBooksCString")!;
+
+builder.Services.AddDbContext<TechBooksContext>(options =>
+{
+    options.UseSqlServer(cnString);
+});
 
 var app = builder.Build();
 
