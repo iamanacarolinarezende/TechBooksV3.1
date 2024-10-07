@@ -1,0 +1,42 @@
+﻿            @model TechBooks.Models.Author
+
+@{
+    if (string.IsNullOrEmpty((string)ViewContext.RouteData.Values["id"]!))
+    {
+        ViewData["Title"] = "Add Author";
+    }
+    else
+    {
+        ViewData["Title"] = "Update Author";
+    }
+}
+
+<form method="post" asp-action="AddOrUpdate">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Name" class="control-label"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" />
+
+            <label asp-for="Email" class="control-label"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" class="form-control" />
+
+            <a href="/ManageAuthors/" class="btn btn-outline-secondary vspace">Back</a>
+
+            @if (Model == null || Model.AuthorId == 0)
+            {
+                <input type="submit" value="Add" class="btn btn-primary vspace" />
+            }
+            else
+            {
+                <input type="hidden" name="AuthorId" value="@Model.AuthorId" />
+                <input type="submit" value="Update" class="btn btn-primary vspace" />
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

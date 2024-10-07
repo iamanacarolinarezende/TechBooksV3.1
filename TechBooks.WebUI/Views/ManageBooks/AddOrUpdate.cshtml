@@ -1,0 +1,46 @@
+﻿            @model TechBooks.Models.Book
+
+@{
+    if (string.IsNullOrEmpty((string)ViewContext.RouteData.Values["id"]!))
+    {
+        ViewData["Title"] = "Add Book";
+    }
+    else
+    {
+        ViewData["Title"] = "Update Book";
+    }
+}
+
+<form method="post" asp-action="AddOrUpdate">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Title" class="control-label"></label>
+            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Title" class="form-control" />
+
+            <label asp-for="Category" class="control-label"></label>
+            <span asp-validation-for="Category.CategoryId" class="text-danger"></span>
+            <select asp-for="Category.CategoryId" asp-items="@ViewBag.Categories" class="form-control">
+                <option value="">(Select a Category)</option>
+            </select>
+
+            <input type="hidden" asp-for="Category.Description" value="Temp Name" />
+
+            <a href="/ManageBooks/" class="btn btn-outline-secondary vspace">Back</a>
+
+            @if (Model == null || Model.BookId == 0)
+            {
+                <input type="submit" value="Add" class="btn btn-primary vspace" />
+            }
+            else
+            {
+                <input type="hidden" name="BookId" value="@Model.BookId" />
+                <input type="submit" value="Update" class="btn btn-primary vspace" />
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

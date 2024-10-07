@@ -1,0 +1,48 @@
+﻿            @model IEnumerable<TechBooks.Models.Book>
+
+@{
+    ViewData["Title"] = "Manage Books";
+}
+
+<p>
+    <a asp-action="AddOrUpdate" class="btn btn-primary">Click here to Add</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.BookId
+            </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Category.Description
+            </td>
+            <td>
+                <a asp-action="AddOrUpdate" asp-route-id=@item.BookId class="btn btn-outline-primary">Update</a>
+                <a asp-controller="ManageBookAuthors" asp-action="Index" asp-route-id="@item.BookId" class="btn btn-outline-primary">Manage Book Authors</a>
+                <form method="post" asp-action="Remove">
+                    <input type="hidden" name="BookId" value="@item.BookId" />
+                    <input type="submit" value="Remove" class="btn btn-danger" onclick="return removeConfirmation();" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
