@@ -15,7 +15,7 @@ Add the following Nugget Packages:
 - Delete the Users table.
 - In the Package Manager Console, select the Default Project: TechBooks.Data.
 - Run the following command: (Ferramentas > Nuget Package Manager > Package Manager console) Certeza que o Projeto Padrao esta selecionado como .Data
-	PM> scaffold-dbcontext "Server=Server=127.0.0.1,1433; Database=TechBooksDBV3.1; User Id=sa; Password=1312Ana@; TrustServerCertificate=True" 
+	PM> scaffold-dbcontext "Server=127.0.0.1,1433; Database=TechBooksDBV3.1; User Id=sa; Password=1312Ana@; TrustServerCertificate=True" 
 	Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TechBooksContext
 
 	System.Data.SqlClient

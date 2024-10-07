@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+form {
+    display: inline;
+}
+
+label, .vspace {
+    margin-top: 10px;
+}
+        

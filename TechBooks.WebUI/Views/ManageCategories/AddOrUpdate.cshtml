@@ -1,0 +1,38 @@
+﻿            @model TechBooks.Models.Category
+
+@{
+    if (string.IsNullOrEmpty((string)ViewContext.RouteData.Values["id"]!))
+    {
+        ViewData["Title"] = "Add Category";
+    }
+    else
+    {
+        ViewData["Title"] = "Update Category";
+    }
+}
+
+<form method="post" asp-action="AddOrUpdate">
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="Description" class="control-label"></label>
+            <span asp-validation-for="Description" class="text-danger"></span>
+            <input asp-for="Description" class="form-control" />
+
+            <a href="/ManageCategories/" class="btn btn-outline-secondary vspace">Back</a>
+
+            @if (Model == null || Model.CategoryId == 0)
+            {
+                <input type="submit" value="Add" class="btn btn-primary vspace" />
+            }
+            else
+            {
+                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                <input type="submit" value="Update" class="btn btn-primary vspace" />
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
